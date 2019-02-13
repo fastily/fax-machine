@@ -1,2 +1,2 @@
 # fax-machine
-📠 send and receive faxes from your computer with Twilio
+📠 send and receive faxes from your browser with Twilio

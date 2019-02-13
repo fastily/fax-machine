@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container pt-3">
+    I want to:
+    <ul>
+        <li><a href="{% url 'send' %}">Send a fax</a></li>
+        <li><a href="{% url 'recieved' %}">Check for recieved faxes</a></li>
+    </ul>
+</div>
+{% endblock %}
