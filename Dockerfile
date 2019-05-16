@@ -1,7 +1,12 @@
 FROM python:alpine
 ENV PYTHONUNBUFFERED 1
-# RUN mkdir /code
-WORKDIR /code
-COPY requirements.txt /code/
-RUN pip install -r requirements.txt
-COPY faxmachine-project/ /code/
+
+# EXPOSE 8000
+
+WORKDIR /faxmachine
+COPY requirements.txt /faxmachine/
+RUN pip install --no-cache-dir -r requirements.txt
+COPY faxmachine-project/ /faxmachine/
+# RUN ls -al &&  pwd
+
+# CMD ["gunicorn", "-b", "0.0.0.0:8000", "faxmachine.wgsi"]

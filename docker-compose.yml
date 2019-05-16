@@ -1,8 +1,9 @@
 version: '3'
 
 services:
-  web:
+  faxmachine:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn -b 0.0.0.0:8000 faxmachine.wsgi
     ports:
       - "8000:8000"
