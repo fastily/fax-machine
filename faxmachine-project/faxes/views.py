@@ -1,12 +1,15 @@
 from django.shortcuts import render
+from django.utils import timezone
 
-# Create your views here.
+from . models import SentFax, RecievedFax
 
 def home(request):
-    return render(request, "faxes/home.html", {})
+    return render(request, "faxes/home.html", {"sent_faxes": SentFax.objects, "recieved_faxes": RecievedFax.objects})
 
 def send(request):
-    return render(request, "faxes/send.html", {})
+    print(request.POST.get("recipient"))
+    print(request.FILES.get("document"))
 
-def recieved(request):
-    return render(request, "faxes/recieved.html", {})
+    SentFax(recipient=request.POST.get("recipient"), document=request.FILES.get("document"), date=timezone.now()).save()
+
+    return render(request, "faxes/success.html", {})

@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from . models import SentFax, RecievedFax
+
+admin.site.register(SentFax)
+admin.site.register(RecievedFax)
