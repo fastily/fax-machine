@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load tz %}
 
 {% block content %}
 
@@ -35,9 +36,9 @@
             <tbody>
             {% for rf in recieved_faxes.all %}
             <tr>
-                <td>{{rf.date}}</td>
+                <td>{{rf.date|timezone:"us/Pacific"}}</td>
                 <td>{{rf.sender}}</td>
-                <td><a href="{{rf.document.url}}">here</a></td>
+                <td><a href="{{rf.document}}">here</a></td>
             </tr>
             {% endfor %}
             </tbody>

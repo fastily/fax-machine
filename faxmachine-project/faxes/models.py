@@ -6,6 +6,9 @@ class SentFax(models.Model):
     document = models.FileField(upload_to="sent/")
 
 class RecievedFax(models.Model):
+    sid = models.CharField(max_length=50)
     date = models.DateTimeField()
     sender = models.CharField(max_length=12)
-    document = models.FileField(upload_to='inbox/')
+    # document = models.FileField(upload_to='inbox/')
+    document = models.TextField()
+    
