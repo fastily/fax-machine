@@ -5,63 +5,72 @@
 
 <div class="container pt-3">
 
-    <h1>Send a Fax</h1>
-    <form method="POST" action="{% url 'send' %}" enctype="multipart/form-data"> <!-- specify multipart post bc contains images -->
-        {% csrf_token %} <!-- protects our website from XSS/CSRF attacks -->
-        Fax To:
-        <br />
-        <input type="tel" name="recipient" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
-        <span class="note">Format: 123-456-7890</span>
-        <br />
-        <br />
-        Document to Fax:
-        <br />
-        <input type="file" accept="application/pdf" name="document" required />
-        <br />
-        <br />
-        <input class="btn btn-primary" type="submit" value="Send!"/>
-    </form>
+  <h1 class="display-3">Send a Fax</h1>
+  <form method="POST" action="{% url 'send' %}" enctype="multipart/form-data">
+    <!-- specify multipart post bc contains images -->
+    {% csrf_token %}
+    <!-- protects our website from XSS/CSRF attacks -->
+    <div class="form-group">
+      <label for="recipient">Fax To</label>
 
-    <hr>
+      <div class="input-group">
+      <div class="input-group-prepend">
+          <span class="input-group-text">+1</span>
 
-    <h1 class="mt-5">Recieved Faxes</h1>
-    <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Date</th>
-                <th scope="col">From</th>
-                <th scope="col">Document</th>
-              </tr>
-            </thead>
-            <tbody>
-            {% for rf in recieved_faxes.all %}
-            <tr>
-                <td>{{rf.date|timezone:"us/Pacific"}}</td>
-                <td>{{rf.sender}}</td>
-                <td><a href="{{rf.document}}">here</a></td>
-            </tr>
-            {% endfor %}
-            </tbody>
-          </table>
+      </div>
+      <input class="form-control" id="recipient" type="tel" name="recipient" placeholder="123-456-7890"
+      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+    </div>
+    </div>
 
-          <h1 class="mt-5">Sent Faxes</h1>
-          <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Recipient</th>
-                    <th scope="col">Document</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% for sf in sent_faxes.all %}
-                  <tr>
-                    <td>{{sf.date}}</td>
-                    <td>{{sf.recipient}}</td>
-                    <td><a href="{{sf.document.url}}">here</a></td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
+    <div class="form-group">
+      <label for="document">Document to Fax (PDF)</label>
+      <input class="form-control-file" type="file" id="document" name="document" accept="application/pdf" required>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Send!" />
+  </form>
+
+  {% comment %}
+  <h1 class="mt-5">Recieved Faxes</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">From</th>
+        <th scope="col">Document</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rf in recieved_faxes.all %}
+      <tr>
+        <td>{{rf.date|timezone:"us/Pacific"}}</td>
+        <td>{{rf.sender}}</td>
+        <td><a href="{{rf.document}}">here</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h1 class="mt-5">Sent Faxes</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Recipient</th>
+        <th scope="col">Document</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sf in sent_faxes.all %}
+      <tr>
+        <td>{{sf.date}}</td>
+        <td>{{sf.recipient}}</td>
+        <td><a href="{{sf.document.url}}">here</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endcomment %}
 </div>
 {% endblock %}
