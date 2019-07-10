@@ -16,10 +16,11 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import include, path
 
-from faxes import views
+# from faxes import views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('faxes/', include("faxes.urls")),
+    # path('', views.home, name='home'),
+    # path('faxes/', include("faxes.urls")),
+    path('', include("faxes.urls")),
 ]
