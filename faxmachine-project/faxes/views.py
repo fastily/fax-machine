@@ -31,8 +31,8 @@ def send(request):
     blob.make_public()
     # print(blob.media_link)
 
-    # fax = Client(settings.ACCOUNT_SID, settings.AUTH_TOKEN).fax.faxes.create(from_=settings.MY_NUMBER, to="+1" + recipient.replace("-", ""), media_url=blob.media_link)
-    # print(fax.sid)
+    fax = Client(settings.ACCOUNT_SID, settings.AUTH_TOKEN).fax.faxes.create(from_=settings.MY_NUMBER, to="+1" + recipient.replace("-", ""), media_url=blob.media_link)
+    print(fax.sid)
 
     message = Mail(
         from_email=From(settings.FROM_EMAIL_ADDRESS, settings.SENDER_NAME),
