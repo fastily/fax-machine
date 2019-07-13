@@ -25,7 +25,7 @@ SECRET_KEY = 'lol'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -123,8 +123,5 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# local_settings in production
-try:
-    from . local_settings import *
-except ImportError:
-    pass
+# make it easy to toggle settings for dev/production
+from . local_settings import *

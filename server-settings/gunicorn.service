@@ -1,0 +1,19 @@
+# Goes in /etc/systemd/system/gunicorn.service
+# Run 'sudo systemctl start gunicorn && sudo systemctl enable gunicorn' to use
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+# Assumes installed on Raspbian, using default user; edit params below before using
+User=pi
+Group=www-data
+WorkingDirectory=/home/pi/fax-machine/faxmachine-project
+ExecStart=/home/pi/.local/bin/gunicorn \
+          --access-logfile - \
+          --bind unix:/run/gunicorn.sock \
+          faxmachine.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

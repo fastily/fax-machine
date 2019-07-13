@@ -1,0 +1,17 @@
+# goes in /etc/nginx/sites-available/PROJECT_NAME.  server_name should specify your server_name/ip 
+server {
+    listen 80;
+
+    # server_name or IP
+    server_name %s;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/pi/fax-machine/faxmachine-project;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
