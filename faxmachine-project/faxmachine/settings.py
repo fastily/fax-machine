@@ -25,7 +25,7 @@ SECRET_KEY = 'lol'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -125,3 +125,27 @@ MEDIA_URL = '/media/'
 
 # make it easy to toggle settings for dev/production
 from . local_settings import *
+
+#######################################################
+############### local_settings.py #####################
+#######################################################
+
+## Twilio
+# ACCOUNT_SID = ""              # Twilio Account SID
+# AUTH_TOKEN = ""               # Twilio App Auth Token
+# MY_NUMBER = ""                # Twilio Fax Number, fmt: +11231231234
+
+## Firebase
+# FIREBASE_KEYS = ""            # Path to JSON file with Firebase keys
+# FIREBASE_STORAGE_BUCKET = ""  # Firebase bucket, e.g. lol.appspot.com
+
+## SendGrid
+# SENDGRID_API_KEY = ""         # Sendgrid API key
+# FROM_EMAIL_ADDRESS = ""       # Email address to send email from
+# SENDER_NAME = ""              # Name to use in From field for sent emails
+# TO_EMAIL_ADDRESS = ""         # Email address to send recieved faxes to
+
+## Other Config
+# ALLOWED_HOSTS = []
+# SECRET_KEY = ""
+# DEBUG = False

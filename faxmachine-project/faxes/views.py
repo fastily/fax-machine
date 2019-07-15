@@ -1,3 +1,5 @@
+"""Handles views for the faxmachine"""
+
 import uuid
 
 from django.shortcuts import render, redirect
@@ -15,7 +17,7 @@ from sendgrid.helpers.mail import Mail, From
 
 def home(request):
     """Displays the home page"""
-    return render(request, "faxes/home.html", {})
+    return render(request, "faxes/home.html", {"my_num": settings.MY_NUMBER[2:5] + "-" + settings.MY_NUMBER[5:8] + "-" + settings.MY_NUMBER[8:]})
 
 def send(request):
     """Sends a fax"""

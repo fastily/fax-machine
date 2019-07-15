@@ -3,12 +3,16 @@
 {% block content %}
 <div class="container pt-3">
 
-  <h1 class="display-3">Send a Fax</h1>
-  <form method="POST" action="{% url 'send' %}" enctype="multipart/form-data"> <!-- specify multipart post bc contains images -->
-    {% csrf_token %} <!-- protects against XSS/CSRF -->
+  <div class="jumbotron text-center">
+    <h1 class="display-3">Send a Fax</h1>
+    <p class="lead">My 📠 number: {{ my_num }}</p>
+  </div>
+
+  <!-- specify multipart post bc contains images -->
+  <form method="POST" action="{% url 'send' %}" enctype="multipart/form-data">
+    {% csrf_token %}
     <div class="form-group">
       <label for="recipient">Fax To</label>
-
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">+1</span>
