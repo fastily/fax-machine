@@ -17,13 +17,10 @@ from sendgrid.helpers.mail import Mail, From
 
 def home(request):
     """Displays the home page"""
-    return render(request, "faxes/home.html", {"my_num": settings.MY_NUMBER[2:5] + "-" + settings.MY_NUMBER[5:8] + "-" + settings.MY_NUMBER[8:]})
+    return render(request, "faxes/home.html", {"my_num": f"{settings.MY_NUMBER[2:5]}-{settings.MY_NUMBER[5:8]}-{settings.MY_NUMBER[8:]}"})
 
 def send(request):
     """Sends a fax"""
-    # print(request.POST.get("recipient"))
-    # print(request.FILES)
-
     recipient = request.POST.get("recipient")
 
     firebase_admin.initialize_app(credentials.Certificate(settings.FIREBASE_KEYS), {'storageBucket': settings.FIREBASE_STORAGE_BUCKET})
@@ -31,7 +28,6 @@ def send(request):
     blob = storage.bucket().blob(str(uuid.uuid4()) + ".pdf")
     blob.upload_from_file(request.FILES.get("document"))
     blob.make_public()
-    # print(blob.media_link)
 
     fax = Client(settings.ACCOUNT_SID, settings.AUTH_TOKEN).fax.faxes.create(from_=settings.MY_NUMBER, to="+1" + recipient.replace("-", ""), media_url=blob.media_link)
     print(fax.sid)
@@ -39,13 +35,13 @@ def send(request):
     message = Mail(
         from_email=From(settings.FROM_EMAIL_ADDRESS, settings.SENDER_NAME),
         to_emails=settings.TO_EMAIL_ADDRESS,
-        subject='Confirming fax to {} was sent'.format(recipient),
-        html_content='Confirming fax to {} was sent.\n\nA copy of the sent file is available <a href="{}">here</a>.'.format(recipient, blob.media_link))
+        subject=f'Confirming fax to {recipient} was sent',
+        html_content=f'Confirming fax to {recipient} was sent.\n\nA copy of the sent file is available <a href="{blob.media_link}">here</a>.')
 
     response = SendGridAPIClient(settings.SENDGRID_API_KEY).send(message)
-    print(response.status_code)
-    print(response.body)
-    print(response.headers)
+    # print(response.status_code)
+    # print(response.body)
+    # print(response.headers)
 
     return redirect("success")
 
