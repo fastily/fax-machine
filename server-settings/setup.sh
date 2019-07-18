@@ -4,6 +4,7 @@
 #:
 #: PRECONDITION: dependencies in requirements.txt have been installed
 #:
+#: Tested on Raspbian Buster
 #: Author: Fastily
 
 if [ "$#" -ne 1 ]; then
