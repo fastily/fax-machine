@@ -8,7 +8,7 @@
 #: Author: Fastily
 
 if [ "$#" -ne 1 ]; then
-	printf "Usage: setupForTheLazy.sh <SERVER_HOSTNAME_OR_IP>\n"
+	printf "Usage: %s <SERVER_HOSTNAME_OR_IP>\n" "${0##*/}"
 	exit 1
 fi
 
