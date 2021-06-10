@@ -1,4 +1,4 @@
-Django==2.2.4
+Django==2.2.24
 firebase-admin==2.18.0
 gunicorn==19.9.0
 sendgrid==6.0.5
